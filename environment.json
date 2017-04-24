@@ -1,0 +1,25 @@
+{
+  "configuration": "test",
+  "dev": {
+    "endpoint": "http://localhost:9000/",
+    "logLevel": "debug",
+    "X-Client-Id": "",
+    "X-Client-Secret": ""
+  },
+  "stage": {
+    "endpoint": "api/v2/stage/",
+    "logLevel":"debug"
+  },
+  "test": {
+    "endpoint": "",
+    "logLevel": "debug",
+    "X-Client-Id": "",
+    "X-Client-Secret": ""
+  },
+  "production": {
+    "endpoint": "",
+    "logLevel": "debug",
+    "X-Client-Id": "",
+    "X-Client-Secret": ""
+  }
+}

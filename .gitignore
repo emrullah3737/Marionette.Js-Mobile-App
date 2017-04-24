@@ -1,0 +1,40 @@
+# Created by http://gitignore.io
+
+### Node ###
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results
+
+npm-debug.log
+node_modules
+bower_components
+test
+dist
+
+### Linux ###
+.*
+!.gitignore
+!.git*
+!.babelrc
+!.editorconfig
+!.eslintrc.json
+!.npmignore
+!.travis.yml
+*~
+
+### App ###
+dist
+.tmp
+
+### OSX ###
+.DS_Store
+.vscode

@@ -1,0 +1,9 @@
+{
+  "name": "mariobase",
+  "version": "0.0.1",
+  "dependencies": {
+    "modernizr": "^2.8.3",
+    "framework7": "^1.5.3",
+    "backbone.syphon": "^0.6.3"
+  }
+}

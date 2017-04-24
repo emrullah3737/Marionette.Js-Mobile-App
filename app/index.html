@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>Halkbank</title>
+
+  <script type="text/javascript" src="cordova.js"></script>
+
+
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+  <!-- endbuild -->
+
+  <!-- build:css(.tmp) assets/css/bootstrap.min.css -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- endbuild -->
+
+  <!-- build:css(.tmp) assets/css/main.css -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <!-- endbuild -->
+</head>
+
+<body>
+  <div id="wrapper" class="wrapper"></div>
+
+  <script src="library/modernizr.js"></script>
+  <script src="library/framework7.min.js"></script>
+<!--   <script src="scripts/app.js"></script> -->
+
+  <script>
+    var app = {
+      initialize: function () {
+        this.bindEvents();
+      },
+      bindEvents: function () {
+        if (document.ondeviceready)
+          document.addEventListener('deviceready', this.onDeviceReady, false);
+        else
+          window.addEventListener('load', this.onDeviceReady, false);
+      },
+      onDeviceReady: function () {
+        var s;
+        s = document.createElement('script');
+        s.src = 'scripts/app.js';
+        document.body.appendChild(s);
+      }
+    };
+    app.initialize();
+
+  </script>
+
+</body>
+
+</html>
