@@ -1,7 +1,7 @@
 import Marionette from 'backbone.marionette';
 import $ from 'jquery';
 import Radio from 'backbone.radio';
-import Site from '../../helpers/site';
+import Site from '../_lib/site';
 
 export default class StaticPage extends Marionette.Behavior {
   constructor(...args) {

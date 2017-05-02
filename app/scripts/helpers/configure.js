@@ -1,7 +1,7 @@
 import Backbone from 'backbone';
 import _ from 'underscore';
-import Site from '../helpers/site';
-import Utils from '../helpers/utils';
+import Site from '../apps/_lib/site';
+import Utils from '../apps/_lib/utils';
 
 function configureApp(callback) {
   Backbone.$

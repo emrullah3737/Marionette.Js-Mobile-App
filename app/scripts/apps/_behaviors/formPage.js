@@ -2,7 +2,7 @@ import Marionette from 'backbone.marionette';
 import Backbone from 'backbone';
 import _ from 'underscore';
 import Syphon from '../../../../bower_components/backbone.syphon/lib/backbone.syphon.min';
-import Site from '../../helpers/site';
+import Site from '../_lib/site';
 
 export default class FormPage extends Marionette.Behavior {
   constructor(...args) {

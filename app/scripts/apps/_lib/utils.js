@@ -2,41 +2,18 @@ import Backbone from 'backbone';
 
 class Utils {
   constructor() {
-    this.isLoggedIn = false;
-    this.passwordStatus = true; // First Password Status
+    console.log('Utils constructor');
   }
-
   init() {
-    const auth = store.get('auth');
-    if (auth && auth.data) {
-      this.isLoggedIn = true;
-      this.user = auth.data;
-      this.setProfile(auth.data.profile);
-      this.isChangePassword(auth.data.passwordChanged);
-    }
-  }
-
-  auth(response) {
-    store.set('auth', response);
-    this.isLoggedIn = true;
-    this.user = response.data;
-    this.setProfile(response.data.profile);
-    this.isChangePassword(response.data.password_changed);
-  }
-
-  setProfile(profile) {
-    this.profile = profile;
-  }
-
-  isChangePassword(passwordState) {
-    if (passwordState === 'Y') {
-      this.passwordStatus = false;
-    }
+    return new Promise((resolve, reject) => {
+      resolve();
+    });
   }
 
   page(name) {
     Backbone.history.navigate(name, { trigger: true });
   }
+  
   toStr(text) {
     this.text = text;
     this.text = this.text.replace(/İ/g, 'i');

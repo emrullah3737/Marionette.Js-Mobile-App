@@ -9,7 +9,7 @@ import 'moment/locale/tr';
 import Layout from './apps/main/view';
 import Router from './apps/_init/router';
 import Transition from '../library/transition';
-import Utils from './helpers/utils';
+import Init from './apps/_lib/init';
 import ConfigureApp from './helpers/configure';
 
 import HandlebarsHelper from './helpers/handlebars_helper';
@@ -51,23 +51,7 @@ App.on('start', () => {
   window.store = new Locally.Store();
 
   // Utils init
-  Utils.init();
-
-  if (Backbone.history) {
-    const opts = {
-      pushState: false,
-    };
-
-    if (Utils.isLoggedIn && window.location.hash === '') {
-      opts.silent = true;
-      Backbone.history.start(opts);
-      Utils.page('/home');
-    } else {
-      Backbone.history.start({
-        pushState: false,
-      });
-    }
-  }
+  Init.init();
 });
 // Configure App
 ConfigureApp(() => {
