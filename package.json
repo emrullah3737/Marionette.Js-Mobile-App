@@ -10,6 +10,11 @@
     "chai": "^3.5.0",
     "chai-jquery": "^2.0.0",
     "del": "^2.2.1",
+    "eslint": "^3.14.1",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
     "gulp": "^3.9.1",
     "gulp-cache": "^0.4.5",
     "gulp-csso": "^2.0.0",
@@ -31,6 +36,8 @@
     "gulp-util": "^3.0.7",
     "handlebars": "^4.0.5",
     "hbsfy": "^2.7.0",
+    "jsdom": "10.1.0",
+    "jsdom-global": "2.1.1",
     "karma": "^1.1.2",
     "karma-browserify": "^5.1.0",
     "karma-chai-sinon": "^0.1.5",
@@ -50,12 +57,7 @@
     "sinon-chai": "^2.8.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.7.0",
-    "eslint": "^3.14.1",
-    "eslint-config-airbnb": "^14.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^3.0.2",
-    "eslint-plugin-react": "^6.9.0"
+    "watchify": "^3.7.0"
   },
   "engines": {
     "node": ">=5.0.0"
@@ -66,15 +68,20 @@
     "backbone.marionette": "^3.2.0",
     "backbone.radio": "^2.0.0",
     "bootstrap": "^3.3.7",
+    "chai": "^3.5.0",
     "fastclick": "^1.0.6",
     "framework7": "^1.5.3",
     "gsap": "^1.19.1",
     "hbsfy": "^2.7.0",
     "jquery": "^3.1.1",
     "jquery-validation": "^1.16.0",
+    "jsdom": "^10.1.0",
     "locallyjs": "^0.3.3",
     "moment": "2.17.1",
     "swiper": "^3.4.2",
     "underscore": "^1.8.3"
+  },
+  "scripts": {
+    "test": "mocha"
   }
 }

@@ -3,7 +3,7 @@ import Utils from './utils';
 
 class Auth {
   constructor() {
-    console.log('Auth constructor');
+    Utils.log('Auth constructor', 'info');
     this.LoggedIn = false;
     this.user = false;
     this.profile = false;
@@ -47,8 +47,16 @@ class Auth {
     if (user !== undefined) this.user = user;
   }
 
+  getUser() {
+    return this.user;
+  }
+
   setProfile(profile) {
     if (profile !== undefined) this.profile = profile;
+  }
+
+  getProfile() {
+    return this.profile;
   }
 
   isChangePassword(passwordState) {

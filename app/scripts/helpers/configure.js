@@ -1,7 +1,6 @@
 import Backbone from 'backbone';
 import _ from 'underscore';
-import Site from '../apps/_lib/site';
-import Utils from '../apps/_lib/utils';
+import Connection from './connection';
 
 function configureApp(callback) {
   Backbone.$
@@ -19,47 +18,13 @@ function configureApp(callback) {
 
       const config = window.config[window.config.configuration];
       const origAjax = Backbone.ajax;
-      const conn = function () {
-        if (
-          typeof Connection === 'undefined' ||
-          typeof navigator === 'undefined' ||
-          typeof navigator.connection === 'undefined'
-        ) {
-          return true;
-        }
-
-        const state = navigator.connection.type || null;
-
-        const states = {};
-        states[Connection.UNKNOWN] = 'UNKNOWN';
-        states[Connection.ETHERNET] = 'ETHERNET';
-        states[Connection.WIFI] = 'WIFI';
-        states[Connection.CELL_2G] = 'CELL_2G';
-        states[Connection.CELL_3G] = 'CELL_3G';
-        states[Connection.CELL_4G] = 'CELL_4G';
-        states[Connection.CELL] = 'CELL';
-        states[Connection.NONE] = 'NONE';
-
-        return states[state];
-      };
+      // const conn = function () {};
+      // Connection initialized
+      Connection.init();
       Backbone.ajax = function (options) {
-        if (conn() === 'NONE') {
-          Site.loaderHide();
-          Site.modal('INTERNET', 'Connection Failed!', 'OK');
-        }
-        conn();
         // setup headers
         const option = options;
-        const header = {
-          'X-Client-Id': config['X-Client-Id'],
-          'X-Client-Secret': config['X-Client-Secret'],
-        };
-
-        if (Utils.user) {
-          header['X-Access-Token'] = Utils.user.token;
-          // utils.log('helpers/configure', utils.user);
-        }
-
+        const header = Connection.setHeaders(config);
 
         option.headers = _.extend(option.headers || {}, header);
 
@@ -73,10 +38,7 @@ function configureApp(callback) {
         }
 
         // Error Codes
-        option.statusCode = {
-          403(model) {},
-          404(model) {},
-        };
+        option.statusCode = Connection.statusCodes();
 
         return origAjax.apply(this, arguments);
       };

@@ -7,7 +7,7 @@ class HandlebarsHelper {
 
     Handlebars.registerHelper('timeForEvent', data => moment(data).format('HH:mm'));
     Handlebars.registerHelper('timeForNotification', data => moment(data).format(' DD MMMM YYYY, HH:mm'));
-    Handlebars.registerHelper('getDay', data => `${moment(data).format('DD MMMM YYYY')}, ${moment(data).format('dddd')}`,);
+    Handlebars.registerHelper('getDay', data => `${moment(data).format('DD MMMM YYYY')}, ${moment(data).format('dddd')}`);
 
     Handlebars.registerHelper('getDate', data => `${moment(data).format('YYYY/MM/DD hh:mm:ss')}`);
 
