@@ -1,4 +1,3 @@
-import Backbone from 'backbone';
 import Utils from './utils';
 
 class Auth {
@@ -62,24 +61,6 @@ class Auth {
   isChangePassword(passwordState) {
     if (passwordState === 'Y') {
       this.passwordStatus = false;
-    }
-  }
-
-  loginRedirection() {
-    if (Backbone.history) {
-      const opts = {
-        pushState: false,
-      };
-
-      if (this.LoggedIn && window.location.hash === '') {
-        opts.silent = true;
-        Backbone.history.start(opts);
-        Utils.page('/home');
-      } else {
-        Backbone.history.start({
-          pushState: false,
-        });
-      }
     }
   }
 }

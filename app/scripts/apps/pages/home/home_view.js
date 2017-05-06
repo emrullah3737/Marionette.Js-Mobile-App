@@ -2,7 +2,6 @@ import Marionette from 'backbone.marionette';
 import StaticPageBehavior from '../../_behaviors/staticPage';
 import ChildView from './home_child_view';
 import EmptyViewTemplate from './home_empty_template.hbs';
-import Camera from '../../_lib/camera';
 
 
 export default class CollectionView extends Marionette.CollectionView {
@@ -26,15 +25,7 @@ export default class CollectionView extends Marionette.CollectionView {
   }
 
   events() {
-    return {
-      'click .camera': 'takePhoto',
-    };
-  }
-
-  takePhoto() {
-    Camera.takePhoto('library', (data) => {
-      console.log(data);
-    });
+    return {};
   }
 
   constructor(...args) {

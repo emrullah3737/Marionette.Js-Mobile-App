@@ -9,6 +9,7 @@ import Layout from './apps/main/view';
 import Router from './apps/_init/router';
 import Transition from '../library/transition';
 import Init from './apps/_lib/init';
+import Auth from './apps/_lib/auth';
 import ConfigureApp from './helpers/configure';
 
 import HandlebarsHelper from './helpers/handlebars_helper';
@@ -48,6 +49,22 @@ App.on('start', () => {
 
   // set local storage (locally)
   window.store = new Locally.Store();
+
+  if (Backbone.history) {
+    const opts = {
+      pushState: false,
+    };
+
+    if (Auth.LoggedIn && window.location.hash === '') {
+      opts.silent = true;
+      Backbone.history.start(opts);
+      Utils.page('/home');
+    } else {
+      Backbone.history.start({
+        pushState: false,
+      });
+    }
+  }
 
   // Utils init
   Init.init();

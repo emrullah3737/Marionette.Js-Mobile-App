@@ -7,7 +7,6 @@ class Camera {
   }
 
   init() {
-    console.log('camera init');
     if (typeof navigator.camera === 'undefined' || typeof navigator.camera.DestinationType === 'undefined') {
       Utils.log(
         `Camera plugin is undefined! at: class ${this.constructor.name}`,

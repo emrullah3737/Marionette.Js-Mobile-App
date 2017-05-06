@@ -18,7 +18,6 @@ class Device {
 
   model() {
     // The device.model returns the name of the device's model or product.
-    console.log(this.init());
     if (this.init() === true) return device.model;
     return 'undefined model';
   }
