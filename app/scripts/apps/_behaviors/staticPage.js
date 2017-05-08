@@ -20,18 +20,18 @@ export default class StaticPage extends Marionette.Behavior {
     const self = this;
     // If View is Collection View or has Collection
     if (this.view.collection) {
-      Site.loaderOpen();
+      Site.loader('open');
       const qs = this.view.options.params ? this.view.options.params : '';
       this.view.collection.fetch({
         data: $.param(qs),
         success() {
-          Site.loaderHide();
+          Site.loader('hide');
           if (self.view.fetchSuccess) {
             self.view.fetchSuccess();
           }
         },
         error() {
-          Site.loaderHide();
+          Site.loader('hide');
           if (self.view.fetchError) {
             self.view.fetchError();
           }

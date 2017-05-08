@@ -129,7 +129,7 @@ class NeDB {
   }
 
   // remove(filename, filterDoc, optionDoc, callback);
-  // filterDoc,  is optional
+  // filterDoc, optionDoc, callback  are optional
   remove(
     filename,
     filterDoc = {},

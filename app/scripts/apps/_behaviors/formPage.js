@@ -31,19 +31,19 @@ export default class FormPage extends Marionette.Behavior {
 
   saveModel() {
     // Loading
-    Site.loaderOpen();
+    Site.loader('open');
     const self = this;
     this.view.model.save(null, {
       error(req, err) {
         // Loading stop
-        Site.loaderHide();
+        Site.loader('hide');
         if (self.view.formError) {
           self.view.formError(req, err);
         }
       },
       success(model, data) {
         // Loading stop
-        Site.loaderHide();
+        Site.loader('hide');
         if (self.view.formSuccess) {
           self.view.formSuccess(model, data);
         }

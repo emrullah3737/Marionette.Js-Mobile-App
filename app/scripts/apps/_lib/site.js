@@ -3,14 +3,10 @@ import Backbone from 'backbone';
 import Radio from 'backbone.radio';
 
 class Site {
-  nav(page, animation, qs) {
+  nav(page, animation = 1, qs) {
     if (!page) return;
     const vent = Radio.channel('navigation');
-    vent.trigger('page:navigate', {
-      page,
-      animation: animation || 1,
-      qs,
-    });
+    vent.trigger('page:navigate', { page, animation, qs });
   }
 
   page(name) {
@@ -39,64 +35,19 @@ class Site {
     return params;
   }
 
-  modal(title, message, buttonText, cb) {
-    myApp.modal({
-      title,
-      text: message,
-      buttons: [
-        {
-          text: buttonText,
-          onClick() {
-            if (cb) cb();
-          },
-        },
-      ],
-    });
-  }
 
-  modalDoubleButton(title, message, buttonText, buttonText2, cb, cb2) {
-    myApp.modal({
-      title,
-      text: message,
-      buttons: [
-        {
-          text: buttonText,
-          onClick() {
-            if (cb) cb();
-          },
-        },
-        {
-          text: buttonText2,
-          onClick() {
-            if (cb2) cb2();
-          },
-        },
-      ],
-    });
+  modal({ title = 'title', text = 'text', buttons = [{ text, onClick }] }) {
+    myApp.modal({ title, text, buttons });
   }
 
   loaderIsActive(cond) {
-    if (cond === true) {
-      this.loaderActive = true;
-      return;
-    }
-    this.loaderActive = false;
+    this.loaderActive = cond === true;
   }
 
-  loaderOpen() {
-    if (this.loaderActive === true) {
-      myApp.showIndicator();
-      return;
+  loader(type) {
+    if (this.loaderActive) {
+      myApp[type === 'open' ? 'showIndicator' : 'hideIndicator']();
     }
-    console.log('loader is inactive');
-  }
-
-  loaderHide() {
-    if (this.loaderActive === true) {
-      myApp.hideIndicator();
-      return;
-    }
-    console.log('loader is inactive');
   }
 }
 
