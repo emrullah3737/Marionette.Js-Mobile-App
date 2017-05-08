@@ -35,7 +35,17 @@ class Site {
     return params;
   }
 
-
+  /*
+      const obj = {
+      title: 'title',
+      text: 'text',
+      buttons: [
+        { text: 'text1', onClick: () => { console.log('button clicked'); } },
+        { text: 'text2', onClick: () => { console.log('button2 clicked'); } },
+      ],
+    };
+    Site.modal(obj);
+    */
   modal({ title = 'title', text = 'text', buttons = [{ text, onClick }] }) {
     myApp.modal({ title, text, buttons });
   }
