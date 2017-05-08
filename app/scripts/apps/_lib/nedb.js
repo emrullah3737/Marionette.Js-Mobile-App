@@ -127,6 +127,27 @@ class NeDB {
       cb(null, numReplaced);
     });
   }
+
+  // remove(filename, filterDoc, optionDoc, callback);
+  // filterDoc,  is optional
+  remove(
+    filename,
+    filterDoc = {},
+    optionDoc = {},
+    cb = (err, numRemoved) => {
+      if (err || !numRemoved) {
+        Utils.log(`neDB.${filename} not removed`, 'error');
+      } else {
+        Utils.log(`neDB.${filename} removed`, 'success');
+        console.log(numRemoved);
+      }
+    },
+  ) {
+    window[filename].remove(filterDoc, optionDoc, (err, numRemoved) => {
+      if (err) cb(err, null);
+      cb(null, numRemoved);
+    });
+  }
 }
 
 export default new NeDB();

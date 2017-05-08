@@ -1,5 +1,6 @@
 import Auth from './auth';
 import Utils from './utils';
+import Site from './site';
 
 class Init {
   constructor() {
@@ -9,7 +10,10 @@ class Init {
   init() {
     Auth.init() // Auth initialized
       .then(
-        () => Utils.init(), // Utils initialized
+        () => {
+          Site.loaderIsActive(false);
+          return Utils.init();
+        }, // Utils initialized
       )
       .then(() => {
         Utils.log('All requirements successfully initialized', 'success');

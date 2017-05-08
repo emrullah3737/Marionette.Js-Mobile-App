@@ -75,12 +75,28 @@ class Site {
     });
   }
 
+  loaderIsActive(cond) {
+    if (cond === true) {
+      this.loaderActive = true;
+      return;
+    }
+    this.loaderActive = false;
+  }
+
   loaderOpen() {
-    myApp.showIndicator();
+    if (this.loaderActive === true) {
+      myApp.showIndicator();
+      return;
+    }
+    console.log('loader is inactive');
   }
 
   loaderHide() {
-    myApp.hideIndicator();
+    if (this.loaderActive === true) {
+      myApp.hideIndicator();
+      return;
+    }
+    console.log('loader is inactive');
   }
 }
 
