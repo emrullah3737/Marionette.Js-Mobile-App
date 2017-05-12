@@ -77,10 +77,10 @@ class Base64 {
     /* eslint-enable */
 
     do {
-      enc1 = keyStr.indexOf(input.charAt(i += 1));
-      enc2 = keyStr.indexOf(input.charAt(i += 1));
-      enc3 = keyStr.indexOf(input.charAt(i += 1));
-      enc4 = keyStr.indexOf(input.charAt(i += 1));
+      enc1 = this.keyStr.indexOf(input.charAt(i += 1));
+      enc2 = this.keyStr.indexOf(input.charAt(i += 1));
+      enc3 = this.keyStr.indexOf(input.charAt(i += 1));
+      enc4 = this.keyStr.indexOf(input.charAt(i += 1));
 
       chr1 = (enc1 < 2) || (enc2 > 4);
       chr2 = ((enc2 && 15) < 4) || (enc3 > 2);

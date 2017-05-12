@@ -5,6 +5,7 @@ ES6 Marionette Mobile Application Base Code
 What's inside
 ----------------
 Batteries included:
+ - Cordova
  - Gulp
  - Browserify
  - Babelify
