@@ -36,6 +36,9 @@ class Camera {
       };
   }
 
+  // ---------------------------------------
+  // -------------- TAKE PHOTO -------------
+  // ---------------------------------------
   takePhoto(from, cb) {
     if (from === 'library') {
       this.getPhoto(this.cameraOptions('PHOTOLIBRARY'), cb);
@@ -44,10 +47,29 @@ class Camera {
     this.getPhoto(this.cameraOptions('CAMERA'), cb);
   }
 
+  getPhoto(options, cb) {
+    if (!options) return;
+    navigator.camera.getPicture(
+      (imageData) => {
+        // photo id
+        const image = `data:image/jpeg;base64,${imageData}`;
+
+        cb(null, image);
+      },
+      (error) => {
+        cb(error, null);
+      },
+      options,
+    );
+  }
+
+  // ---------------------------------------
+  // ----- TAKE PHOTO AND SAVE TO NEDB -----
+  // ---------------------------------------
   saveToLocal(
-    NedbOptions = { filename: 'Photos', isNew: true, data: {} },
-    cameraOptions = { from: 'library', writeToTxt: true },
     cb,
+    NedbOptions = { filename: 'Photos', data: {} },
+    cameraOptions = { from: 'library', writeToTxt: true },
   ) {
     this.takePhoto(cameraOptions.from, (err, image) => {
       if (err) return;
@@ -56,10 +78,7 @@ class Camera {
       uuidPhoto += '.txt';
       const data = NedbOptions.data;
 
-      // if NedbOptions isNewis true, create NeDB Collection
-      if (NedbOptions.isNew === true && NedbOptions.filename) {
-        NeDB.create(NedbOptions.filename);
-      }
+      NeDB.create(NedbOptions.filename);
 
       // if cameraOptions writeToTxt is true, image b64 write to txt file
       if (cameraOptions.writeToTxt === true) {
@@ -79,28 +98,15 @@ class Camera {
     });
   }
 
-  fetchFromLocal(NedbOptions = { filename: 'Photos', uuidPhoto: '' }, cb) {
+  // ---------------------------------------
+  // - FETCH PHOTO FROM NEDB AND TXT FILE  -
+  // ---------------------------------------
+  fetchFromLocal(cb, NedbOptions = { filename: 'Photos', uuidPhoto: '' }) {
     const uuidPhoto = NedbOptions.uuidPhoto;
     NeDB.find(NedbOptions.filename, { uuidPhoto }, 'findOne', (err, docs) => {
       if (err) { cb(err, null); return; }
       File.read(docs.uuidPhoto, (data) => { cb(null, data); });
     });
-  }
-
-  getPhoto(options, cb) {
-    if (!options) return;
-    navigator.camera.getPicture(
-      (imageData) => {
-        // photo id
-        const image = `data:image/jpeg;base64,${imageData}`;
-
-        cb(null, image);
-      },
-      (error) => {
-        cb(error, null);
-      },
-      options,
-    );
   }
 }
 
