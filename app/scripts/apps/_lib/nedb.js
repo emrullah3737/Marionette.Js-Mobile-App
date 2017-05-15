@@ -40,11 +40,12 @@ class NeDB {
     });
   }
 
-  // find(filename, filterDoc, callback);
-  // callback is optional
+  // find(filename, filterDoc, type, callback);
+  // callback and type are optional
   find(
     filename,
     filterDoc,
+    type = 'find',
     cb = (err, docs) => {
       if (err || !docs) {
         Utils.log(`neDB.${filename} data not found`, 'error');
@@ -54,29 +55,9 @@ class NeDB {
       }
     },
   ) {
-    window[filename].find(filterDoc, (err, docs) => {
+    window[filename][type](filterDoc, (err, docs) => {
       if (err) cb(err, null);
       cb(null, docs);
-    });
-  }
-
-  // findOne(filename, _id, callback);
-  // callback is optional
-  findOne(
-    filename,
-    _id,
-    cb = (err, doc) => {
-      if (err || !doc) {
-        Utils.log(`neDB.${filename} One data not found`, 'error');
-      } else {
-        Utils.log(`neDB.${filename} One data found`, 'success');
-        console.log(doc);
-      }
-    },
-  ) {
-    window[filename].findOne({ _id }, (err, doc) => {
-      if (err) cb(err, null);
-      cb(null, doc);
     });
   }
 
