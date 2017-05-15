@@ -74,8 +74,7 @@ class Camera {
     this.takePhoto(cameraOptions.from, (err, image) => {
       if (err) return;
 
-      let uuidPhoto = UUID();
-      uuidPhoto += '.txt';
+      const uuidPhoto = `${UUID()}.txt`;
       const data = NedbOptions.data;
 
       NeDB.create(NedbOptions.filename);
@@ -104,8 +103,13 @@ class Camera {
   fetchFromLocal(cb, NedbOptions = { filename: 'Photos', uuidPhoto: '' }) {
     const uuidPhoto = NedbOptions.uuidPhoto;
     NeDB.find(NedbOptions.filename, { uuidPhoto }, 'findOne', (err, docs) => {
-      if (err) { cb(err, null); return; }
-      File.read(docs.uuidPhoto, (data) => { cb(null, data); });
+      if (err) {
+        cb(err, null);
+        return;
+      }
+      File.read(docs.uuidPhoto, (data) => {
+        cb(null, data);
+      });
     });
   }
 }
