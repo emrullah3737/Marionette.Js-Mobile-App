@@ -34,18 +34,15 @@ class NeDB {
       console.log(newDoc);
     },
   ) {
-    window[filename].insert(doc, (err, newDoc) => {
-      if (err) cb(err, null);
-      cb(null, newDoc);
-    });
+    window[filename].insert(doc, cb);
   }
 
   // find(filename, filterDoc, type, callback);
   // callback and type are optional
   find(
     filename,
-    filterDoc,
     type = 'find',
+    filterDoc = {},
     cb = (err, docs) => {
       if (err || !docs) {
         Utils.log(`neDB.${filename} data not found`, 'error');
@@ -55,10 +52,7 @@ class NeDB {
       }
     },
   ) {
-    window[filename][type](filterDoc, (err, docs) => {
-      if (err) cb(err, null);
-      cb(null, docs);
-    });
+    window[filename][type](filterDoc, cb);
   }
 
   // update(filename, filterDoc, newDoc, optionDoc, callback);
@@ -77,12 +71,7 @@ class NeDB {
       }
     },
   ) {
-    window[
-      filename
-    ].update(filterDoc, newDoc, optionDoc, (err, numReplaced) => {
-      if (err) cb(err, null);
-      cb(null, numReplaced);
-    });
+    window[filename].update(filterDoc, newDoc, optionDoc, cb);
   }
 
   // upsert(filename, filterDoc, newDoc, callback);
@@ -103,10 +92,7 @@ class NeDB {
   ) {
     window[
       filename
-    ].update(filterDoc, newDoc, optionDoc, (err, numReplaced) => {
-      if (err) cb(err, null);
-      cb(null, numReplaced);
-    });
+    ].update(filterDoc, newDoc, optionDoc, cb);
   }
 
   // remove(filename, filterDoc, optionDoc, callback);
@@ -124,10 +110,7 @@ class NeDB {
       }
     },
   ) {
-    window[filename].remove(filterDoc, optionDoc, (err, numRemoved) => {
-      if (err) cb(err, null);
-      cb(null, numRemoved);
-    });
+    window[filename].remove(filterDoc, optionDoc, cb);
   }
 }
 
