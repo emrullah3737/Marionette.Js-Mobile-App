@@ -50,11 +50,4 @@ It will compile the project and put the result under `dist` directory. You can r
 
 Testing
 ---------
-Two options exists to run tests, the first one is for development process and aims to practice Test Driven Development.
-
-    $ gulp tdd
-
-It will open a Google Chrome instance and run all tests on it, when a file is updated tests will be run again. You can see the rests as a notification or in the console.
-The other option to run tests is for Continuous Integration purposes, it will run all the tests against PanthomJS and output a jUnit format file for analysis.
-    
-    $ gulp test
+W.I.P
