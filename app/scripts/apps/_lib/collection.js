@@ -13,8 +13,10 @@ class Collection {
         limit,
         (file, cb) => {
           _.each(file, (collection, index) => {
-            if (collection.fetch) {
-              collection.fetch({
+            const qs = collection.qs || '';
+            if (collection.col.fetch) {
+              collection.col.fetch({
+                data: $.param(qs),
                 success(data) {
                   obj[index] = data;
                   cb();

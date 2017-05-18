@@ -2,6 +2,7 @@ import _ from 'underscore';
 import async from 'async';
 import $ from 'jquery';
 import Site from './site';
+import NeDB from './nedb';
 
 class Model {
   fetchAll(models = []) {
@@ -13,8 +14,10 @@ class Model {
         limit,
         (file, cb) => {
           _.each(file, (model, index) => {
-            if (model.fetch) {
-              model.fetch({
+            const qs = model.qs || '';
+            if (model.mdl.fetch) {
+              model.mdl.fetch({
+                data: $.param(qs),
                 success(data) {
                   obj[index] = data;
                   cb();
@@ -52,10 +55,22 @@ class Model {
     });
   }
 
-  save(models, dataArr = [], options = { limit: 4 }) {
+  saveToLocal(options, dataArr) {
+    NeDB.create(options.modelName);
+    _.each(dataArr, (data, index) => {
+      NeDB.insert(options.modelName, data);
+    });
+  }
+
+  save(models, dataArr = [], options = { limit: 4, saveToLocal: false, modelName: 'Model' }) {
     return new Promise((resolve, reject) => {
       const arr = [];
       Site.loader('show');
+
+      // Save to LocalStorage
+      if (options.saveToLocal === true) {
+        this.saveToLocal(options, dataArr);
+      }
       async.eachLimit(
         dataArr,
         options.limit,
@@ -74,10 +89,22 @@ class Model {
     });
   }
 
-  destroy(models, dataArr = [], options = { limit: 4 }) {
+  destroyFromLocal(options, dataArr) {
+    NeDB.create(options.modelName);
+    _.each(dataArr, (data, index) => {
+      NeDB.remove(options.modelName, data, { multi: true });
+    });
+  }
+
+  destroy(models, dataArr = [], options = { limit: 4, destroyFromLocal: false, modelName: 'Model' }) {
     return new Promise((resolve, reject) => {
       const arr = [];
       Site.loader('show');
+
+      // Save to LocalStorage
+      if (options.destroyFromLocal === true) {
+        this.destroyFromLocal(options, dataArr);
+      }
       async.eachLimit(
         dataArr,
         options.limit,

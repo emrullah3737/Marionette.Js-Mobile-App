@@ -11,9 +11,9 @@ class Init {
 
   init() {
     const obj = [
-      { Col1: new ExpCollection([{ name: 'Emo' }, { name: 'Emsfsdfo' }]) },
-      { Col2: new ExpCollection([{ name: 'qwe' }, { name: 'Emodfg' }]) },
-      { Col3: new ExpCollection([{ name: 'qwe' }, { name: 'Emodfg' }]) },
+      { Col1: { col: new ExpCollection([{ name: 'Emo' }, { name: 'Emsfsdfo' }]), qs: { populate: 'profile' } } },
+      { Col2: { col: new ExpCollection([{ name: 'Emo' }, { name: 'Emsfsdfo' }]), qs: '' } },
+      { Col3: { col: new ExpCollection([{ name: 'Emo' }, { name: 'Emsfsdfo' }]), qs: '' } },
     ];
     Collection.fetchAll(obj)
     .then(console.log);
