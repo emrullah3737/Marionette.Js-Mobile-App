@@ -16,16 +16,10 @@ class Model {
           _.each(file, (model, index) => {
             const qs = model.qs || '';
             if (model.mdl.fetch) {
-              model.mdl.fetch({
-                data: $.param(qs),
-                success(data) {
-                  obj[index] = data;
-                  cb();
-                },
-                error(err) {
-                  obj[index] = err;
-                  cb();
-                },
+              this.fetch(model.mdl, qs)
+              .then((data) => {
+                obj[index] = data;
+                cb();
               });
             }
           });
@@ -40,15 +34,12 @@ class Model {
 
   fetch(models, qs = {}) {
     return new Promise((resolve, reject) => {
-      Site.loader('show');
       models.fetch({
         data: $.param(qs),
         success(model, data) {
-          Site.loader('hide');
           resolve({ model, data });
         },
         error(error) {
-          Site.loader('hide');
           reject(error);
         },
       });
@@ -62,6 +53,15 @@ class Model {
     });
   }
 
+  /*
+    Here is example for save
+    const obj = [
+      { a: 'a', b: 'b' },
+      { c: 'c', d: 'd' },
+    ];
+    Model.save(new ExpModel(), obj, { limit: 4, saveToLocal: true, modelName: 'ModelName' })
+    .then(console.log);
+  */
   save(models, dataArr = [], options = { limit: 4, saveToLocal: false, modelName: 'Model' }) {
     return new Promise((resolve, reject) => {
       const arr = [];
@@ -101,7 +101,7 @@ class Model {
       const arr = [];
       Site.loader('show');
 
-      // Save to LocalStorage
+      // Destroy from LocalStorage
       if (options.destroyFromLocal === true) {
         this.destroyFromLocal(options, dataArr);
       }

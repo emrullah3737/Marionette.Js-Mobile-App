@@ -1,8 +1,6 @@
 import Auth from './auth';
 import Utils from './utils';
 import Site from './site';
-import ExpCollection from '../_collections/collection';
-import Collection from './collection';
 
 class Init {
   constructor() {
@@ -10,13 +8,6 @@ class Init {
   }
 
   init() {
-    const obj = [
-      { Col1: { col: new ExpCollection([{ name: 'Emo' }, { name: 'Emsfsdfo' }]), qs: { populate: 'profile' } } },
-      { Col2: { col: new ExpCollection([{ name: 'Emo' }, { name: 'Emsfsdfo' }]), qs: '' } },
-      { Col3: { col: new ExpCollection([{ name: 'Emo' }, { name: 'Emsfsdfo' }]), qs: '' } },
-    ];
-    Collection.fetchAll(obj)
-    .then(console.log);
     Auth.init() // Auth initialized
       .then(
         () => {

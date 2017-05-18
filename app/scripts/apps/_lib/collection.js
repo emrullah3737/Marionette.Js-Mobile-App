@@ -1,9 +1,18 @@
 import _ from 'underscore';
 import async from 'async';
 import $ from 'jquery';
-import Site from './site';
 
 class Collection {
+  /*
+  Here is example for fetchAll
+    const obj = [
+      { Col1: { col: new ExpCollection([{ name: 'Emo' }]), qs: { populate: 'profile' } } },
+      { Col2: { col: new ExpCollection([{ name: 'Emo' }, { name: 'Emsfsdfo' }]), qs: '' } },
+      { Col3: { col: new ExpCollection([{ name: 'Emo' }, { name: 'Emsfsdfo' }]), qs: '' } },
+    ];
+    Collection.fetchAll(obj)
+    .then(console.log);
+    */
   fetchAll(collections = []) {
     return new Promise((resolve, reject) => {
       const obj = {};
@@ -15,16 +24,10 @@ class Collection {
           _.each(file, (collection, index) => {
             const qs = collection.qs || '';
             if (collection.col.fetch) {
-              collection.col.fetch({
-                data: $.param(qs),
-                success(data) {
-                  obj[index] = data;
-                  cb();
-                },
-                error(err) {
-                  obj[index] = err;
-                  cb();
-                },
+              this.fetch(collection.col, qs)
+              .then((data) => {
+                obj[index] = data;
+                cb();
               });
             }
           });
@@ -39,16 +42,13 @@ class Collection {
 
   fetch(collection, qs = {}) {
     return new Promise((resolve, reject) => {
-      Site.loader('show');
       collection.fetch({
         data: $.param(qs),
-        success(model, data) {
-          Site.loader('hide');
-          resolve({ model, data });
+        success(data) {
+          resolve(data);
         },
         error(error) {
-          Site.loader('hide');
-          reject(error);
+          resolve(error);
         },
       });
     });
