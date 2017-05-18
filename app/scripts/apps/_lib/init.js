@@ -15,7 +15,7 @@ class Init {
       { Col2: new ExpCollection([{ name: 'qwe' }, { name: 'Emodfg' }]) },
       { Col3: new ExpCollection([{ name: 'qwe' }, { name: 'Emodfg' }]) },
     ];
-    Collection.bindCollections(obj)
+    Collection.fetchAll(obj)
     .then(console.log);
     Auth.init() // Auth initialized
       .then(

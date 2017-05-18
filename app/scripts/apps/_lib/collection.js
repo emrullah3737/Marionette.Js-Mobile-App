@@ -1,19 +1,28 @@
 import _ from 'underscore';
 import async from 'async';
+import $ from 'jquery';
+import Site from './site';
 
 class Collection {
-  bindCollections(collections = []) {
+  fetchAll(collections = []) {
     return new Promise((resolve, reject) => {
       const obj = {};
+      const limit = 4;
       async.eachLimit(
         collections,
-        4,
+        limit,
         (file, cb) => {
           _.each(file, (collection, index) => {
             if (collection.fetch) {
               collection.fetch({
-                success(data) { obj[index] = data; cb(); },
-                error(err) { obj[index] = err; cb(); },
+                success(data) {
+                  obj[index] = data;
+                  cb();
+                },
+                error(err) {
+                  obj[index] = err;
+                  cb();
+                },
               });
             }
           });
@@ -23,6 +32,23 @@ class Collection {
           resolve(obj);
         },
       );
+    });
+  }
+
+  fetch(collection, qs = {}) {
+    return new Promise((resolve, reject) => {
+      Site.loader('show');
+      collection.fetch({
+        data: $.param(qs),
+        success(model, data) {
+          Site.loader('hide');
+          resolve({ model, data });
+        },
+        error(error) {
+          Site.loader('hide');
+          reject(error);
+        },
+      });
     });
   }
 }
