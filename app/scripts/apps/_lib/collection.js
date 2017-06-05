@@ -40,6 +40,12 @@ class Collection {
     });
   }
 
+  /*
+  Here is example for fetch
+  Collection.fetch(new ExpCollection(), qs: { populate: 'profile' })
+  .then(console.log);
+  */
+
   fetch(collection, qs = {}) {
     return new Promise((resolve, reject) => {
       collection.fetch({

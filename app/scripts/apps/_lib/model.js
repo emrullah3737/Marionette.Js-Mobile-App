@@ -32,6 +32,12 @@ class Model {
     });
   }
 
+
+    /*
+  Here is example for fetch
+  Model.fetch(new ExpModel(), qs: { populate: 'profile' })
+  .then(console.log);
+  */
   fetch(models, qs = {}) {
     return new Promise((resolve, reject) => {
       models.fetch({
@@ -96,6 +102,15 @@ class Model {
     });
   }
 
+    /*
+  Here is example for destroy (When destroy the model, must put id attribute)
+  const obj = [
+      { id: '1', b: 'b' },
+      { id: '2', d: 'd' },
+    ];
+  Model.destroy(new ExpModel(), obj, { limit: 4, destroyFromLocal: true, modelName: 'ModelName' })
+  .then(console.log);
+  */
   destroy(models, dataArr = [], options = { limit: 4, destroyFromLocal: false, modelName: 'Model' }) {
     return new Promise((resolve, reject) => {
       const arr = [];
