@@ -1,7 +1,7 @@
 {
-  "configuration": "test",
+  "configuration": "dev",
   "dev": {
-    "endpoint": "http://localhost:9000/",
+    "endpoint": "http://127.0.0.1:3001/",
     "logLevel": "debug",
     "X-Client-Id": "",
     "X-Client-Secret": ""
